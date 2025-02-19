@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Final Inspection Checklist</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Final Inspection Cleaning Checklist</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script>
+    // Simple function to preview uploaded images
+    function previewImage(event, previewId) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const previewImg = document.getElementById(previewId);
+        previewImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleFormSubmit() {
+      alert("Checklist submitted!");
+      // Here you could add form submission logic, e.g.:
+      // 1. Gather all fields
+      // 2. Send to server via fetch/AJAX or simply do a standard form POST
+    }
+  </script>
 </head>
 <body>
-  <!-- HEADER -->
+
   <header>
-    <div class="header-container">
-      <h1 class="logo">
-        514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
-      </h1>
-      <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="scope-of-work.html">Scope of Work</a></li>
-        <li><a href="booking-details.html">Booking Details</a></li>
-        <li><a href="site-access.html">Site Access Info</a></li>
-        <li><a href="final-inspection-checklist.html" class="active">Final Inspection Checklist</a></li>
-      </ul>
-    </nav>
+    514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
 
-  <!-- MAIN CONTENT -->
   <main>
     <h2>Final Inspection Cleaning Checklist</h2>
 
-    <!-- 1. General Internal Areas -->
-    <h3>1. General Internal Areas</h3>
-    <div class="responsive-table">
+    <form onsubmit="event.preventDefault(); handleFormSubmit();">
+      <!-- ========== 1. General Internal Areas ========== -->
+      <h3>1. General Internal Areas</h3>
       <table>
         <thead>
           <tr>
@@ -40,87 +45,107 @@
             <th>OK</th>
             <th>Needs Attention</th>
             <th>Comments</th>
-            <th>Photo</th>
+            <th>Photo Upload</th>
+            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
+          <!-- Floors -->
           <tr>
             <td>Floors (all debris/dust removed, no stains or footprints)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="floorsOk" /></td>
+            <td><input type="checkbox" name="floorsNeeds" /></td>
+            <td><input type="text" name="floorsComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewFloors')"/>
+            </td>
+            <td>
+              <img id="previewFloors" class="preview-image" alt="No image"/>
             </td>
           </tr>
+          <!-- Carpets -->
           <tr>
             <td>Carpets (vacuumed, spot‐cleaned)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="carpetsOk" /></td>
+            <td><input type="checkbox" name="carpetsNeeds" /></td>
+            <td><input type="text" name="carpetsComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewCarpets')"/>
+            </td>
+            <td>
+              <img id="previewCarpets" class="preview-image" alt="No image"/>
             </td>
           </tr>
+          <!-- Walls and Ceilings -->
           <tr>
             <td>Walls and Ceilings (no dust, smudges, or marks)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="wallsOk" /></td>
+            <td><input type="checkbox" name="wallsNeeds" /></td>
+            <td><input type="text" name="wallsComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewWalls')"/>
+            </td>
+            <td>
+              <img id="previewWalls" class="preview-image" alt="No image"/>
             </td>
           </tr>
+          <!-- Doors, Door Frames, Handles -->
           <tr>
             <td>Doors, Door Frames, Handles (clean, stickers removed)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="doorsOk" /></td>
+            <td><input type="checkbox" name="doorsNeeds" /></td>
+            <td><input type="text" name="doorsComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewDoors')"/>
+            </td>
+            <td>
+              <img id="previewDoors" class="preview-image" alt="No image"/>
             </td>
           </tr>
+          <!-- Skirting Boards, Window Sills, Ledges -->
           <tr>
             <td>Skirting Boards, Window Sills, Ledges (dust‐free)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="skirtingOk" /></td>
+            <td><input type="checkbox" name="skirtingNeeds" /></td>
+            <td><input type="text" name="skirtingComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewSkirting')"/>
+            </td>
+            <td>
+              <img id="previewSkirting" class="preview-image" alt="No image"/>
             </td>
           </tr>
+          <!-- Air Vents, Fans, Light Fittings -->
           <tr>
             <td>Air Vents, Fans, Light Fittings (dust‐free)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="ventsOk" /></td>
+            <td><input type="checkbox" name="ventsNeeds" /></td>
+            <td><input type="text" name="ventsComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewVents')"/>
+            </td>
+            <td>
+              <img id="previewVents" class="preview-image" alt="No image"/>
             </td>
           </tr>
+          <!-- Outlets and Switches -->
           <tr>
             <td>Outlets and Switches (dust‐free, no residue)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="outletsOk" /></td>
+            <td><input type="checkbox" name="outletsNeeds" /></td>
+            <td><input type="text" name="outletsComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewOutlets')"/>
+            </td>
+            <td>
+              <img id="previewOutlets" class="preview-image" alt="No image"/>
             </td>
           </tr>
         </tbody>
       </table>
-    </div>
 
-    <!-- 2. Windows & Glazing -->
-    <h3>2. Windows &amp; Glazing</h3>
-    <div class="responsive-table">
+      <!-- ========== 2. Windows & Glazing ========== -->
+      <h3>2. Windows &amp; Glazing</h3>
       <table>
         <thead>
           <tr>
@@ -128,47 +153,52 @@
             <th>OK</th>
             <th>Needs Attention</th>
             <th>Comments</th>
-            <th>Photo</th>
+            <th>Photo Upload</th>
+            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Window Glass (streak‐free, no adhesive residue)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="winGlassOk" /></td>
+            <td><input type="checkbox" name="winGlassNeeds" /></td>
+            <td><input type="text" name="winGlassComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewWinGlass')"/>
+            </td>
+            <td>
+              <img id="previewWinGlass" class="preview-image" alt="No image"/>
             </td>
           </tr>
           <tr>
             <td>Window Frames, Tracks, Sills (clean, debris removed)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="winFramesOk" /></td>
+            <td><input type="checkbox" name="winFramesNeeds" /></td>
+            <td><input type="text" name="winFramesComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewWinFrames')"/>
+            </td>
+            <td>
+              <img id="previewWinFrames" class="preview-image" alt="No image"/>
             </td>
           </tr>
           <tr>
             <td>Internal Glazing Panels, Partitions, Mirrors (streak‐free)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
+            <td><input type="checkbox" name="intGlazingOk" /></td>
+            <td><input type="checkbox" name="intGlazingNeeds" /></td>
+            <td><input type="text" name="intGlazingComments" /></td>
             <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
+              <input type="file" accept="image/*" onchange="previewImage(event, 'previewIntGlazing')"/>
+            </td>
+            <td>
+              <img id="previewIntGlazing" class="preview-image" alt="No image"/>
             </td>
           </tr>
         </tbody>
       </table>
-    </div>
 
-    <!-- 3. Joinery & Fixtures -->
-    <h3>3. Joinery &amp; Fixtures</h3>
-    <div class="responsive-table">
+      <!-- ========== 3. Joinery & Fixtures ========== -->
+      <h3>3. Joinery &amp; Fixtures</h3>
       <table>
         <thead>
           <tr>
@@ -176,212 +206,10 @@
             <th>OK</th>
             <th>Needs Attention</th>
             <th>Comments</th>
-            <th>Photo</th>
+            <th>Photo Upload</th>
+            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Cabinetry, Shelves, Cupboards (interior/exterior dust‐free)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Door Handles, Light Switches, Power Outlets (wiped clean)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Kitchen Surfaces, Benchtops, Sinks (clean, no stains/residue)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 4. Sanitary Areas -->
-    <h3>4. Sanitary Areas (Bathrooms, Powder Rooms, Amenities)</h3>
-    <div class="responsive-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
-            <th>Comments</th>
-            <th>Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Toilets, Urinals (disinfected, free of stains/odors)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Sinks, Taps (clean, disinfected)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Vanities, Mirrors, Towel Rails, Soap Holders (clean, streak‐free)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Shower Screens (clean, stickers removed)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Floors (mopped, disinfected, no residue)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 5. Balconies, Patios & External Areas -->
-    <h3>5. Balconies, Patios &amp; External Areas</h3>
-    <div class="responsive-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
-            <th>Comments</th>
-            <th>Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Floors (swept, washed, free of construction debris)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Rubbish Removal (all construction trash cleared)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Overall Appearance (tidy, ready for inspection)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 6. Final Checks & Waste Disposal -->
-    <h3>6. Final Checks &amp; Waste Disposal</h3>
-    <div class="responsive-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
-            <th>Comments</th>
-            <th>Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>All Cleaning‐Related Waste in Designated Bins</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>No Specialized Treatments/Deep Polishing (excluded unless specified)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-          <tr>
-            <td>Overall Site Condition (ready for handover/inspection)</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="text" placeholder="Comments"></td>
-            <td>
-              <input type="file" accept="image/*" />
-              <img class="preview" alt="Preview" style="display: none;" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 Spruces — All Rights Reserved.</p>
-  </footer>
-</body>
-</html>
+           
