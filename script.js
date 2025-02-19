@@ -1,11 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Example: Show filename next to each file input
+  // 1. Menu Toggle
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navUl = document.querySelector(".main-nav ul");
+
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      navUl.classList.toggle("show");
+    });
+  }
+
+  // 2. Image Preview for each file input
   const fileInputs = document.querySelectorAll('input[type="file"]');
-  fileInputs.forEach(input => {
-    input.addEventListener("change", (e) => {
-      const fileName = e.target.files[0] ? e.target.files[0].name : "No file chosen";
-      alert(`Selected file: ${fileName}`);
-      // Or update the UI in some other way...
+  fileInputs.forEach((input) => {
+    input.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      const previewImg = input.nextElementSibling; // the <img class="preview"> next to the input
+
+      if (file && previewImg) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImg.src = e.target.result;
+          previewImg.style.display = "block";
+          previewImg.style.width = "100px"; // or adjust as needed
+          previewImg.style.height = "auto";
+        };
+        reader.readAsDataURL(file);
+      } else if (previewImg) {
+        previewImg.style.display = "none";
+      }
     });
   });
 });
